@@ -109,6 +109,8 @@
             }
 </style>
 <div class="container">
+  <a href="{% url 'export-societe-excel' %}" class="btn btn-primary">Télécharger Excel</a>
+  <a href="{% url 'export-societe-csv' %}" class="btn btn-primary">Télécharger CSV</a>
     <h2>Select Number Of Rows</h2>
             <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
                  <select class  ="form-control" name="state" id="maxRows">
@@ -149,11 +151,11 @@
                         <td>{{ societe.numero3 }}</td>
                         <td>{{ societe.fixe }}</td>
                         <td>
-                            <ul>
+                           
                                 {% for adresse in societe.adresses.all %}
-                                <li>{{ adresse.adresse }}, {{ adresse.ville }}</li>
+                                {{ adresse.adresse }}, {{ adresse.ville }}
                                 {% endfor %}
-                            </ul>
+                            
                         </td>
                         {% for decideur in societe.decideurs.all %}
                         <td>{{ decideur.prenom }}</td>
