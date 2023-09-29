@@ -1,6 +1,7 @@
-{% extends "myapp/home.html" %}
+{% extends "Database/Base_html.html" %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/media/styles/style_pro.css">
   <h1>Welcome to your profile, {{ user_profile.user.username }}!</h1>
   
   {% if user_profile %}
@@ -20,5 +21,6 @@
   {% endif %}
   
   <!-- Add other content here -->
-  
+
+<script type="text/javascript" src="/media/scripts/script_pro.js"></script>
 {% endblock %}

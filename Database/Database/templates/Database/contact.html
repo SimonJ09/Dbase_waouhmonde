@@ -1,0 +1,28 @@
+{% extends "Database/Base_html.html" %}
+
+{% block content%}
+
+<link rel="stylesheet" type="text/css" href="/media/styles/style_con.css">
+<div class="contact-container">
+    <h1>Contactez-nous</h1>
+    
+    <p>Pour toute question ou demande de renseignements, n'hésitez pas à nous contacter.</p>
+
+    <div class="contact-form">
+        <form method="post">
+            {% csrf_token %}
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="email">Adresse e-mail :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="/media/Scripts/script_con.js"></script>
+{% endblock %}

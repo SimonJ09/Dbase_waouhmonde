@@ -32,7 +32,7 @@ def inscription(request):
             UserProfile.objects.create(user=user)
             
             login(request, user)
-            return redirect('home')
+            return redirect('homes')
     else:
         form = CustomUserCreationForm()
     return render(request, 'utilisateurs/inscription.html', {'form': form})
@@ -53,7 +53,7 @@ def connexion(request):
                 # Vérifiez si un UserProfile existe pour l'utilisateur, et créez-en un s'il n'existe pas
                 user_profile, created = UserProfile.objects.get_or_create(user=user)
                 
-                return redirect('home')
+                return redirect('homes')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'utilisateurs/connexion.html', {'form': form})

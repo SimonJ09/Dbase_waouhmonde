@@ -18,12 +18,21 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.accueil, name='accueil'), 
+    path('apropos/', views.propos, name='propos'), 
     path('homes/', views.homes, name='homes'),
+    path("contact/", views.contact_view, name='contact'),
     path('home/', include('myapp.urls')), 
+    path('base/', include('myapp_personnes.urls')), 
     path('utilisateur/', include('utilisateurs.urls')), 
   
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
