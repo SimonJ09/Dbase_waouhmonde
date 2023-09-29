@@ -72,4 +72,7 @@ admin.site.register(Societe)
 admin.site.register(Decideur)
 
 
-
+# Définissez l'URL pour la vue d'importation personnalisée
+urlpatterns = [
+    path('import-societe/', SocieteAdmin.import_societe, name='import_societe'),
+]
