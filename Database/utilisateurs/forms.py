@@ -10,7 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['username','email', 'password1', 'password2']
 
 class CustomAuthenticationForm(AuthenticationForm):
-    email = forms.EmailField(max_length=254, help_text="Required. Enter a valid email address.")
+    
     class Meta:
         model = CustomUser
-        fields = ('email', 'password')
+        fields = ('username', 'password')

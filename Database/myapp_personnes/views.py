@@ -5,6 +5,57 @@ import pandas as pd
 from django.http import HttpResponse
 import csv
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import UploadFileForm
+import pandas as pd
+
+# Importez les modules nécessaires
+import pandas as pd
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import UploadFileForm
+from .models import Personne
+
+def import_personne(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = form.cleaned_data['fichier']
+            try:
+                if uploaded_file.name.endswith('.xlsx'):
+                    # Chargez le fichier Excel
+                    data = pd.read_excel(uploaded_file)
+                elif uploaded_file.name.endswith('.csv'):
+                    # Chargez le fichier CSV
+                    data = pd.read_csv(uploaded_file)
+                else:
+                    raise ValueError("Le format de fichier n'est pas pris en charge.")
+
+                for index, row in data.iterrows():
+                    email = row['email']
+                    # Vérifiez si une personne avec cet email existe déjà
+                    personne, created = Personne.objects.get_or_create(email=email)
+
+                    # Mise à jour des valeurs avec celles du fichier
+                    for field in Personne._meta.get_fields():
+                        field_name = field.name
+                        if field_name in row:
+                            setattr(personne, field_name, row[field_name])
+
+                    # Sauvegardez l'enregistrement
+                    personne.save()
+
+                messages.success(request, f'Données mises à jour pour {len(data)} personnes.')
+
+            except Exception as e:
+                messages.error(request, f'Une erreur s\'est produite : {str(e)}')
+        else:
+            messages.error(request, f'Veuillez sélectionner un fichier valide.')
+
+    return redirect('admin:myapp_personnes_personne_changelist')
+
+
 
 def personne_view(request):
     personnes = Personne.objects.all()

@@ -14,6 +14,7 @@ class Adresse(models.Model):
 class Decideur(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
+    sexe = models.CharField(max_length=100)
     poste = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     numero1 = models.CharField(max_length=20)

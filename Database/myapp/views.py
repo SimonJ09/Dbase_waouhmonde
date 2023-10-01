@@ -1,10 +1,51 @@
 # views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Societe
 import pandas as pd
 from django.http import HttpResponse
 from myapp.models import Societe
 import csv
+from django.contrib import messages
+from .forms import UploadFileForm
+ 
+
+def import_societe(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = form.cleaned_data['fichier']
+            try:
+                if uploaded_file.name.endswith('.xlsx'):
+                    # Chargez le fichier Excel
+                    data = pd.read_excel(uploaded_file)
+                elif uploaded_file.name.endswith('.csv'):
+                    # Chargez le fichier CSV
+                    data = pd.read_csv(uploaded_file)
+                else:
+                    raise ValueError("Le format de fichier n'est pas pris en charge.")
+
+                for index, row in data.iterrows():
+                    emails = row['emails']
+                    # Vérifiez si une personne avec cet email existe déjà
+                    societe, created = Societe.objects.get_or_create(emails=emails)
+
+                    # Mise à jour des valeurs avec celles du fichier
+                    for field in Societe._meta.get_fields():
+                        field_name = field.name
+                        if field_name in row:
+                            setattr(societe, field_name, row[field_name])
+
+                    # Sauvegardez l'enregistrement
+                    societe.save()
+
+                messages.success(request, f'Données mises à jour pour {len(data)} personnes.')
+
+            except Exception as e:
+                messages.error(request, f'Une erreur s\'est produite : {str(e)}')
+        else:
+            messages.error(request, f'Veuillez sélectionner un fichier valide.')
+
+    return redirect('admin:myapp_societe_changelist')
 
 def home_view(request):
     return render(request, 'myapp/home.html')
@@ -16,13 +57,6 @@ def societe_view(request):
     }
     return render(request, 'myapp/societe.html', context)
 
-def update_database_from_csv(file_path):
-    data = pd.read_csv(file_path)
-    for index, row in data.iterrows():
-        mon_objet = MonModele.objects.get(id=row['id']) 
-        mon_objet.champ1 = row['champ1']  
-        mon_objet.champ2 = row['champ2']
-        mon_objet.save()
 
 
 def export_societe_to_excel(request):
@@ -83,7 +117,5 @@ def export_societe_to_csv(request):
     return response
 
 
-
-if __name__ == "__main__":
-    update_database_from_csv("chemin_vers_votre_fichier.csv")
+    
 

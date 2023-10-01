@@ -1,102 +1,268 @@
-<link rel="stylesheet" type="text/css" href="/media/styles/style_base.css">
-<body class="skin-blue">
-  <div class="wrapper">
-      <header class="main-header">
-          <a href="http://crudkit.com/demo/" class="logo">User Panel</a>
-          <!-- Header Navbar: style can be found in header.less -->
-          <nav class="navbar navbar-static-top" role="navigation">
-              <!-- Sidebar toggle button-->
-              <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </a>
-              <div class="navbar-custom-menu">
-              </div>
-          </nav>
-      </header>
-      <aside class="main-sidebar">
-          <section class="sidebar">
-              <ul class="sidebar-menu">
-                  <li class="header">PAGES</li>
-                                      <li role="presentation" class="active"><a href="{% url 'homes' %}"><i class="fa fa-book"></i>Home</a></li>
-                                      <li role="presentation" class="active"><a href="{% url 'propos' %}"><i class="fa fa-book"></i>A propos</a></li>
-                                      <li role="presentation" class="active"><a href="{% url 'societe' %}"><i class="fa fa-book"></i>Base Sociétés</a></li>
-                                      <li role="presentation"><a href="{% url 'personne' %}"><i class="fa fa-book"></i>Base Personnes</a></li>
-                                      <li role="presentation"><a href="{% url 'contact' %}"><i class="fa fa-book"></i>Contact</a></li>          
-                                      <li class="header">EXTRA</li>
-                                      <li role="presentation"><a href="{% url 'profil' %}"><i class="fa fa-sign-out"></i>Profil</a></li>
-                                      <li role="presentation"><a href="{% url 'custom_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
-                </ul>
-          </section>
-      </aside>
-      <div class="content-wrapper" style="min-height: 279px;">
-              <section class="content-header">
-    <div class="row">
-      <div class="col-md-8">
-        <h3 style="margin-top: 5px">
-          Customer Management
-        </h3>
-      </div>
-      <div class="col-md-4">
-
-      </div>
-    </div>
-  </section>
-    <div class="col-md-12">
-      <div id="alertTarget">
-      </div>
-    </div>
-  <section class="content">
-  <div class="row">
-      <div class="col-md-12">
-        <div class="box box-primary" style="padding-top:15px">
-          <div class="box-body">
-                
-      <div ng-controller="SummaryTableController" class="ng-scope">
-      <div class="row">
-          <div class="col-md-9">
-              <div class="input-group col-md-5">
-              <input type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="" ng-model="searchTerm" ng-keyup="$event.keyCode == 13 ? filterColumns () : null">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="filterColumns()" ng-disabled="searchTerm == ''" disabled="disabled">Search</button>
-              </span>
-              </div>   
-          </div>
-          <div class="col-md-3">
-              <div class="pull-right">
-                  <p><a class="btn btn-sm btn-success" ng-click="startAdvancedSearch ()">Advanced Search</a></p>
-              </div>
-          </div>
-      </div>
-      </div>
-      <div >
-        {% block content %}
-        
-        {% endblock %}
-      <div class="cg-busy cg-busy-backdrop cg-busy-backdrop-animation ng-scope ng-hide" ng-show="$cgBusyIsActive()"></div><div class="cg-busy cg-busy-animation ng-scope ng-hide" ng-show="$cgBusyIsActive()"><div class="cg-busy-default-wrapper" style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;">
+<style>
+  body {
+    color: #00171F;
+    font-family: Lato, sans-serif;
+    background-color: #f6f6f6;
+  }
+  #jude{
+    width: 130px;
+    height: 40px;
+  }
+  a {
+    color: #007EA7;
+    text-decoration: none;
+  }
   
-     <div class="cg-busy-default-sign">
-
-     </div>
+  p {
+    color: #444;
+    font-size: 14px;
+    line-height: 20px;
+  }
   
-  </div></div></div>
-      </div>
- 
-          </div>
-        </div> 
-      </div>
-  </div>
-  </section>
+  h1 {
+    padding-bottom: 10px;
+    margin-top: 0;
+    font-size: 42px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #ddd;
+    cursor: default;
+  }
+  
+  h2 {
+    color: #003459;
+    margin-bottom: 10px;
+  }
+  
+  /**
+    Container
+  */
+  .app-container {
+    display: flex;
+    flex-flow: row wrap;
+    height: 100vh;
+  }
+  
+  
+  /**
+    Navigation
+  */
+  .nav {
+    flex: 1;
+    max-width: 180px;
+    background-color: #007EA7;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .nav__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: #ccc;
+    font-size: 24px;
+    letter-spacing: 1px;
+    background-color: #00171F;
+    cursor: default;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+    cursor: pointer;
+  }
+  
+  .nav__list {
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .nav__list-item {
+    position: relative;
+  }
+  
+  .nav__list-item--active {
+    padding: 10px 0 10px 15px;
     
+    .nav__item-link {
+      padding: 15px 15px;
+      color: #1a1a1a;
+      font-weight: 700;
+      background-color: #FFFBFC;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+  }
+  
+  .nav__item-link {
+    display: block;
+    padding: 10px 30px;
+    color: #eee;
+  }
+  
+  /**
+    App View
+  */
+  .app-view {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  
+  /**
+    Utility Bar
+  */
+  .utility-bar {
+    height: 50px;
+    font-size: 13px;
+    font-weight: 300;
+    background-color: #002a38;
+  }
+  
+  .utility-bar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 100%;
+  }
+  
+  .utility-bar__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .utility-bar__list-item {
+    
+  }
+  
+  .utility-bar__item-link {
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    height: 50px;
+    
+    svg,
+    svg path {
+      fill: #007EA7 !important;
+      transition: fill 200ms ease-out;    
+    }
+    
+    &:hover {
+      svg,
+      svg path {
+        fill: #00A8E8 !important;
+      }
+    }
+  }
+  
+  .utility-bar__indicator {
+    position: relative;
+    left: -7px;  
+    top: 9px;
+    width: 14px;
+    height: 14px;
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    background-color: #d90000;
+    border-radius: 100%;
+  }
+  
+  .utility-bar__account {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    
+    &:hover {
+      .utility-bar__account-name {
+        color: #eee;
+      }
+    }
+  }
+  
+  .utility-bar__account-avatar {
+    display: inline-block;
+    margin-right: 10px;  
+    width: 32px;
+    height: 32px;
+    background-color: #666;
+    background-image: url('http://keenanstaffieri.com/wp-content/uploads/2014/07/keenan_avatar2.jpg');
+    background-size: 100%;
+    border-radius: 100%;
+  }
+  
+  .utility-bar__account-name {
+    color: #00A8E8;
+    transition: color 200ms ease-out;
+  }  
+  
+  /**
+    Content
+  */
+  .content {
+    flex: 1;
+    padding: 30px;
+    background-color: #FFFBFC;
+    -webkit-font-smoothing: antialiased;  
+  }
+</style>
+
+
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="/media/styles/style_base.css">
+
+<div class="app-container">
+  
+  <nav class="nav">
+    <a href="#" class="nav__logo">
+      <img id = "jude"  src="/media/images/logo1.png" />
+    </a>
+    <ul class="nav__list">
+      <li class="nav__list-item">
+        <a href="{% url 'homes' %}" class="nav__item-link">Home</a>
+      </li>
+      <li class="nav__list-item nav__list-item--active">
+        <a href="{% url 'propos' %}" class="nav__item-link">A propos</a>
+      </li>
+      <li class="nav__list-item">
+        <a href="{% url 'societe' %}" class="nav__item-link">Base Society</a>
+      </li>
+      <li class="nav__list-item">
+        <a href="{% url 'personne' %}" class="nav__item-link">Base personn</a>
+      </li>
+      <li class="nav__list-item">
+        <a href="{% url 'contact' %}" class="nav__item-link">Contacts</a>
+      </li>
+      <li class="nav__list-item">
+        <a href="{% url 'profil' %}" class="nav__item-link">Profil</a>
+      </li>
+      <li class="nav__list-item">
+        <a href="{% url 'custom_logout' %}" class="nav__item-link">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  
+  <div class="app-view">
+    
+    <nav class="utility-bar">
+      <div class="utility-bar__inner">
+        <ul class="utility-bar__list">
+       
+        </ul>
+        <a href="#" class="utility-bar__account">
+          <span class="utility-bar__account-avatar"></span>
+          <span class="utility-bar__account-name">Keenan Staffieri</span>
+        </a>
       </div>
-      <footer class="main-footer">
-          <div class="pull-right hidden-xs">
-          <b>Version</b> 0.1
-        </div>
-        <strong>Powered by <a href="#">XageMarket</a>.</strong>
-    </footer>
+    </nav>
+    
+    <main class="content">    
+      {% block content %}
+          
+      {% endblock %}
+    </main>
+    
   </div>
-</body>
+  
+</div>
+
 <script type="text/javascript" src="/media/Scripts/script_base.js"></script>

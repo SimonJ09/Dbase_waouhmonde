@@ -4,7 +4,8 @@ class Adresse(models.Model):
     postal = models.CharField(max_length=10)
     adresse = models.CharField(max_length=255)
     ville = models.CharField(max_length=100)
-
+    pays = models.CharField(max_length=100)
+    continent= models.CharField(max_length=100)
     def __str__(self):
         return f"{self.adresse}, {self.ville}"
 

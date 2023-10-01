@@ -35,7 +35,7 @@ def inscription(request):
             return redirect('homes')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'utilisateurs/inscription.html', {'form': form})
+    return render(request, 'utilisateurs/connexion.html', {'form': form})
 
 
 
@@ -43,10 +43,10 @@ def connexion(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
+            
             password = form.cleaned_data.get('password')
             username = form.cleaned_data.get('username')
-            user = authenticate(request, email=email, password=password, username=username)
+            user = authenticate(request, password=password, username=username)
             if user is not None:
                 login(request, user)
                 
