@@ -99,7 +99,7 @@
   .showcase {
     width: 100%;
     height: 400px;
-    background: url('https://i.ibb.co/zGSDGCL/slide1.png') no-repeat center center/cover;
+    background: url('/media/images/monde.jpg') no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,7 +150,7 @@
   .xbox {
     width: 100%;
     height: 350px;
-    background: url('https://i.ibb.co/tBJGPD9/xbox.png') no-repeat center center/cover;
+    background: url('/media/images/biologie.webp') no-repeat center center/cover;
     margin-bottom: 20px;
   }
   
@@ -167,7 +167,7 @@
   .carbon {
     width: 100%;
     height: 350px;
-    background: url('https://i.ibb.co/72cgtsz/carbon.jpg') no-repeat center center/cover;
+    background: url('/media/images/biologie.webp') no-repeat center center/cover;
   }
   
   .carbon .content {

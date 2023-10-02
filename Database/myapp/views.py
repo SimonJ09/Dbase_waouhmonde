@@ -8,7 +8,6 @@ import csv
 from django.contrib import messages
 from .forms import UploadFileForm
  
-
 def import_societe(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -24,15 +23,17 @@ def import_societe(request):
                 else:
                     raise ValueError("Le format de fichier n'est pas pris en charge.")
 
+                # Get the columns available in the uploaded file
+                available_columns = data.columns
+
                 for index, row in data.iterrows():
                     emails = row['emails']
                     # Vérifiez si une personne avec cet email existe déjà
                     societe, created = Societe.objects.get_or_create(emails=emails)
 
                     # Mise à jour des valeurs avec celles du fichier
-                    for field in Societe._meta.get_fields():
-                        field_name = field.name
-                        if field_name in row:
+                    for field_name in available_columns:
+                        if field_name in Societe._meta.get_all_field_names():
                             setattr(societe, field_name, row[field_name])
 
                     # Sauvegardez l'enregistrement
@@ -46,6 +47,7 @@ def import_societe(request):
             messages.error(request, f'Veuillez sélectionner un fichier valide.')
 
     return redirect('admin:myapp_societe_changelist')
+
 
 def home_view(request):
     return render(request, 'myapp/home.html')
