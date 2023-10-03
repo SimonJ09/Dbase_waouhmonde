@@ -6,10 +6,13 @@ from .forms import CustomAuthenticationForm
 from .models import UserProfile  # Import your UserProfile model
 from django.contrib.auth import logout
 
+from django.shortcuts import render
+from .models import UserProfile
+
 def profile_view(request):
     if request.user.is_authenticated:
         user = request.user
-        user_profile = UserProfile.objects.get(user=user)
+        user_profile = UserProfile.objects.filter(user=user).first()
         context = {
             'user_profile': user_profile,
         }
@@ -17,6 +20,7 @@ def profile_view(request):
     else:
         # Handle the case when the user is not logged in
         return render(request, 'not_logged_in.html')
+
 
 
 

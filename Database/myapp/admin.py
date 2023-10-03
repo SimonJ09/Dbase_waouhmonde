@@ -1,11 +1,8 @@
 from django.contrib import admin
-from .models import Adresse, Decideur, Societe
+from .models import  Societe
 from django.http import HttpResponseRedirect
 from django.urls import path
 from django import forms
-import pandas as pd
-from django import forms
-from django.contrib import admin
 import pandas as pd
 
 class UploadFileForm(forms.Form):
@@ -48,5 +45,3 @@ class SocieteAdmin(admin.ModelAdmin):
 
 # Enregistrez le modèle personnalisé dans l'administration
 admin.site.register(Societe, SocieteAdmin)
-admin.site.register(Adresse)
-admin.site.register(Decideur)

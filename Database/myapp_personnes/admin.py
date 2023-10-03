@@ -1,6 +1,6 @@
 # admin.py
 from django.contrib import admin
-from .models import Adresse, Personne
+from .models import  Personne
 import pandas as pd
 from django.http import HttpResponseRedirect
 from django.urls import path
@@ -44,4 +44,3 @@ class PersonneAdmin(admin.ModelAdmin):
 
 # Enregistrez le modèle personnalisé dans l'administration
 admin.site.register(Personne, PersonneAdmin)
-admin.site.register(Adresse)

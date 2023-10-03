@@ -16,5 +16,5 @@ class UserProfile(models.Model):
     bio = models.TextField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.user.username
-        return self.user.email
+        return f"{self.user.username} - {self.user.date_of_birth} {self.user.profile_picture }{self.user.bio}"
+

@@ -23,8 +23,8 @@
                 <th>Société</th>
                 <th>Secteur</th>
                 <th>Emails</th>
-                <th>Tel 1</th>
-                <th>Code Postal</th>
+                <th>Site web</th>
+                <th>telephone</th>
                 <th>Ville</th>
                 <th>Nom</th>
                 <th>Prenom</th>
@@ -34,25 +34,16 @@
         <tbody>
             {% for societe in societes %}
             <tr>
-                <td>{{ societe.nom }}</td>
+                <td>{{ societe.societe }}</td>
                 <td>{{ societe.secteur }}</td>
                 <td>{{ societe.emails }}</td>
-                <td>{{ societe.numero1 }}</td>
-                    {% for adresse in societe.adresses.all %}
-                    <td>{{ adresse.postal }}</td>
-                    <td>{{ adresse.ville }}</td>
+                <td>{{ societe.site_web }}</td>
+                <td>{{ societe.telephone1 }}</td>
+                <td>{{ societe.ville }}</td>
+                <td>{{ societe.nom}}</td>
+                <td>{{ societe.prenom}}</td>
+                <td>{{ societe.poste}}</td>
                     {% empty %}
-                    <!-- Si la liste des décideurs est vide -->
-                    {% endfor %}
-                    {% for decideur in societe.decideurs.all %}
-                        <td>{{ decideur.nom}}</td>
-                        <td>{{ decideur.prenom}}</td>
-                        <td>{{ decideur.poste}}</td>
-                    {% empty %}
-                    <!-- Si la liste des décideurs est vide -->
-                    {% endfor %}
-                </td>
-            </tr>
             {% endfor %}
         </tbody>
     </table>

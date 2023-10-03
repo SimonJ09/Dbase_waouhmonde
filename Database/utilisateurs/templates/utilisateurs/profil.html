@@ -2,25 +2,25 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="/media/styles/style_pro.css">
-  <h1>Welcome to your profile, {{ user_profile.user.username }}!</h1>
-  
-  {% if user_profile %}
-    <p>Email: {{ user_profile.user.email }}</p>
-    <!-- Add more fields as needed -->
-    {% if user_profile.date_of_birth %}
-      <p>Date of Birth: {{ user_profile.date_of_birth }}</p>
-    {% endif %}
-    {% if user_profile.profile_picture %}
-      <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
-    {% endif %}
-    {% if user_profile.bio %}
-      <p>Bio: {{ user_profile.bio }}</p>
-    {% endif %}
-  {% else %}
-    <p>No profile information available.</p>
+<h1>Welcome to your profile, {{ user_profile.user.username }}!</h1>
+
+{% if user_profile %}
+  <p>Email: {{ user_profile.user.email }}</p>
+  <!-- Add more fields as needed -->
+  {% if user_profile.date_of_birth %}
+    <p>Date of Birth: {{ user_profile.date_of_birth }}</p>
   {% endif %}
-  
-  <!-- Add other content here -->
+  {% if user_profile.profile_picture %}
+    <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
+  {% endif %}
+  {% if user_profile.bio %}
+    <p>Bio: {{ user_profile.bio }}</p>
+  {% endif %}
+{% else %}
+  <p>No profile information available.</p>
+{% endif %}
+
+<!-- Add other content here -->
 
 <script type="text/javascript" src="/media/scripts/script_pro.js"></script>
 {% endblock %}

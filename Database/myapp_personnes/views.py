@@ -53,7 +53,8 @@ def import_personne(request):
         else:
             messages.error(request, f'Veuillez sélectionner un fichier valide.')
 
-    return redirect('admin:myapp_personnes_personne_changelist')
+    return redirect('admin:myapp_personne_changelist')  # Mise à jour de la redirection
+
 
 
 

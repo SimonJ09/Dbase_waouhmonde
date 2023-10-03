@@ -32,8 +32,9 @@ def import_societe(request):
                     societe, created = Societe.objects.get_or_create(emails=emails)
 
                     # Mise à jour des valeurs avec celles du fichier
+                    model_fields = [field.name for field in Societe._meta.get_fields()]
                     for field_name in available_columns:
-                        if field_name in Societe._meta.get_all_field_names():
+                        if field_name in model_fields:
                             setattr(societe, field_name, row[field_name])
 
                     # Sauvegardez l'enregistrement
@@ -47,6 +48,7 @@ def import_societe(request):
             messages.error(request, f'Veuillez sélectionner un fichier valide.')
 
     return redirect('admin:myapp_societe_changelist')
+
 
 
 def home_view(request):
