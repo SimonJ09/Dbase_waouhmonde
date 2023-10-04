@@ -1,7 +1,8 @@
 {% extends "Database/Base_html.html" %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="/media/styles/style_hom.css">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'Database/styles/style_hom.css' %}">
 <div class="menu-btn">
     <i class="fas fa-bars fa-2x"></i>
   </div>
@@ -25,7 +26,7 @@
     <!-- Home cards 1 -->
     <section class="home-cards">
       <div>
-        <img src="/media/images/monde.jpg" alt="">
+        <img src="{% static 'Database/images/monde.jpg' %}" alt="">
         <h3>Formation</h3>
         <p>
           Grâce au partenariat OpenClassrooms-Waouh Monde et son programme spécial Afrique de l’Ouest, vous pouvez désormais suivre de multiples formations 
@@ -34,7 +35,7 @@
         <a href="https://openclassrooms.waouhmonde.com/">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
-        <img src="/media/images/cahier.jpg" alt="" />
+        <img src="{% static 'Database/images/cahier.jpg' %}" alt="" />
         <h3>Le cahier de charges</h3>
         <p>
           En matière de développement logiciel, le cahier de charges occupe une place primordiale. En effet, il constitue le socle sur lequel repose toute la conception et la réalisation d’une application informatique. Le cahier de charges permet aux équipes techniques et fonctionnelles d’avoir une vision claire des 
@@ -43,7 +44,7 @@
         <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
-        <img src="/media/images/talent.png" alt="" />
+        <img src="{% static 'Database/images/talent.png' %}" alt="" />
         <h3>Deuxième édition WaouhTalent</h3>
         <p>
           Développer ses talents avec WaouhTalent :
@@ -58,7 +59,7 @@
         <a href="https://waouhmonde.com/nos-publications/">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
-        <img src="/media/images/talent.png" alt="" />
+        <img src="{% static 'Database/images/talent.png' %}" alt="" />
         <h3>CARE INTERNATIONAL BENIN/TOGO</h3>
         <p>
           Notre activité a consisté à développer une plateforme web plateforme
@@ -72,7 +73,7 @@
     <!-- Home cards 2 -->
 			<section class="home-cards">
 				<div>
-					<img src="/media/images/talent.png" alt="" />
+					<img src="{% static 'Database/images/talent.png' %}" alt="" />
 					<h3>Plateforme de gestion pour cabinet d’avocats</h3>
 					<p>
             Prunelle est une solution 
@@ -82,7 +83,7 @@
 					<a href="https://waouhmonde.com/nos-publications/">Shop Now <i class="fas fa-chevron-right"></i></a>
 				</div>
 				<div>
-					<img src="/media/images/talent.png" alt="" />
+					<img src="{% static 'Database/images/talent.png' %}" alt="" />
 					<h3>Gestion foncière</h3>
 					<p>
 						Logiciel de gestion complète des activités d’une commune. 
@@ -94,7 +95,7 @@
 					<a href="https://waouhmonde.com/nos-publications/">Shop Now <i class="fas fa-chevron-right"></i></a>
 				</div>
 				<div>
-					<img src="/media/images/talent.png" alt="" />
+					<img src="{% static 'Database/images/talent.png' %}" alt="" />
 					<h3>Application de gestion complète des ventes sur les parcs automobiles</h3>
 					<p>
           « Flashcar » est une application web et mobile
@@ -108,7 +109,7 @@
 					<a href="https://waouhmonde.com/nos-publications/">Download Now <i class="fas fa-chevron-right"></i></a>
 				</div>
 				<div>
-					<img src="/media/images/talent.png" alt="" />
+					<img src="{% static 'Database/images/talent.png' %}" alt="" />
 					<h3>Application de gestion pour ferme avicole et plateforme de données statistiques</h3>
 					<p>
         Cette application de gestion avicole
@@ -175,5 +176,5 @@
           </ul>
         </div>
       </section>
-<script type="text/javascript" src="/media/Scripts/script_hom.js"></script>
+<script type="text/javascript" src="{% static 'Database/scripts/script_hom.js' %}"></script>
 {% endblock %}

@@ -204,17 +204,59 @@
     background-color: #FFFBFC;
     -webkit-font-smoothing: antialiased;  
   }
+  /* Styles pour les écrans plus grands */
+.nav__list {
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__list-item {
+  position: relative;
+}
+
+.nav__list-item--active {
+  padding: 10px 0 10px 15px;
+
+  .nav__item-link {
+    padding: 15px 15px;
+    color: #1a1a1a;
+    font-weight: 700;
+    background-color: #FFFBFC;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+}
+
+.nav__item-link {
+  display: block;
+  padding: 10px 30px;
+  color: #eee;
+}
+
+/* Styles pour les écrans plus petits (par exemple, max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .nav__list {
+    display: none; /* Masquer la liste de navigation */
+  }
+
+  .nav__logo {
+    display: block; /* Afficher le bouton du logo ou du menu ici */
+    /* Ajoutez des styles pour le bouton de menu, par exemple, une icône hamburger */
+  }
+}
+
 </style>
 
-
+{% load static %}
 <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="/media/styles/style_base.css">
+<link rel="stylesheet" type="text/css" href="{% static 'Database/styles/style_base.css' %}">
 
 <div class="app-container">
   
   <nav class="nav">
     <a href="#" class="nav__logo">
-      <img id = "jude"  src="/media/images/logo1.png" />
+      <img id = "jude"  src="{% static 'Database/images/logo1.png' %}" />
     </a>
     <ul class="nav__list">
       <li class="nav__list-item">
@@ -250,7 +292,7 @@
         </ul>
         <a href="#" class="utility-bar__account">
           <span class="utility-bar__account-avatar"></span>
-          <span class="utility-bar__account-name">Keenan Staffieri</span>
+          <span class="utility-bar__account-name">{{ user_profile.user.username }}</span>
         </a>
       </div>
     </nav>
@@ -265,4 +307,4 @@
   
 </div>
 
-<script type="text/javascript" src="/media/Scripts/script_base.js"></script>
+<script type="text/javascript" src="{% static 'Database/scripts/script_base.js' %}"></script>

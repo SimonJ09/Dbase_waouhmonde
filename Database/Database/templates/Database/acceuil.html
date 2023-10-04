@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="/media/styles/style_acc.css">
+		{% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'Database/styles/style_acc.css' %}" >
         <title>acceuil</title>
     </head>
 	<body>
@@ -35,5 +36,6 @@
 			</div>
 			<!---->
 		</header>
-        <script type="text/javascript" src="/media/Scripts/script_acc.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'Database/scripts/script_acc.js' %}">
+        
     	

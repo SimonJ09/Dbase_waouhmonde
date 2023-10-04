@@ -7,7 +7,29 @@ from myapp.models import Societe
 import csv
 from django.contrib import messages
 from .forms import UploadFileForm
+from .forms import RechercheSocieteForm
+
+def recherche_societe(request):
+    if request.method == 'POST':
+        print('ok')
+        form = RechercheSocieteForm(request.POST)
+        print(('ok'))
+        if form.is_valid():
+            terme_recherche = form.cleaned_data['terme_recherche']
+            societes = Societe.objects.filter(societe__icontains=terme_recherche)
+    else:
+        form = RechercheSocieteForm()
+        societes = Societe.objects.all()
+
+    context = {
+        'societes': societes,
+        'form': form,
+    }
+
+    return render(request, 'myapp/societe.html', context)
  
+
+
 def import_societe(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -55,7 +77,7 @@ def home_view(request):
     return render(request, 'myapp/home.html')
 
 def societe_view(request):
-    societes = Societe.objects.all()
+    societes = Societe.objects.all().order_by('societe')
     context = {
         'societes': societes
     }
@@ -86,7 +108,7 @@ def export_societe_to_excel(request):
 
 def export_societe_to_csv(request):
     # Récupérez toutes les données de la société
-    societes = Societe.objects.all()
+    societes = Societe.objects.all().order_by('societe')
 
     # Créez une réponse HTTP avec un type de contenu CSV
     response = HttpResponse(content_type='text/csv')
@@ -121,5 +143,6 @@ def export_societe_to_csv(request):
     return response
 
 
-    
 
+def custom_404(request, exception):
+    return render(request, 'Database/404.html', status=404)

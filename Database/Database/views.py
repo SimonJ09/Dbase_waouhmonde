@@ -68,3 +68,5 @@ def contact_view(request):
     return render(request, 'Database/contact.html', {'form': form})
 
 
+def custom_404(request, exception):
+    return render(request, 'Database/404.html', status=404)

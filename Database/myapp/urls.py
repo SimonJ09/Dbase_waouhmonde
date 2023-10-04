@@ -9,4 +9,7 @@ urlpatterns = [
     path('societe/', views.societe_view, name='societe'),
     path('export-societe-excel/', views.export_societe_to_excel, name='export-societe-excel'),
     path('export-societe-csv/', views.export_societe_to_csv, name='export-societe-csv'),
+    path('check_societe/', views.recherche_societe, name='recherche_societe'),
+
 ]
+handler404 = 'myapp.views.custom_404'

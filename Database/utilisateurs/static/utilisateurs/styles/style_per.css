@@ -1,0 +1,100 @@
+
+.pagination {
+    display: inline-block;
+   
+  }
+  
+  .pagination li {
+    display: inline;
+   
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .pagination li.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .pagination li:hover {
+    background-color: #ccc;
+  }
+  
+body {
+    background-color: #eee;
+}
+
+table th, table td {
+    text-align: center;
+}
+
+table tr:nth-child(even) {
+    background-color: #BEF2F5;
+}
+
+.pagination li:hover {
+    cursor: pointer;
+}
+
+table tbody tr {
+    display: none;
+}
+/* Style du tableau */
+.table {
+width: 100%;
+margin-bottom: 1rem;
+color: #333;
+background-color: #fff;
+border-collapse: collapse;
+border: 1px solid #ccc;
+}
+
+/* Style de l'en-tête du tableau */
+.table thead th {
+background-color: #007bff;
+color: #fff;
+text-align: center;
+
+}
+
+/* Style des lignes impaires du tableau */
+.table tbody tr:nth-child(odd) {
+background-color: #f2f2f2;
+}
+
+/* Style des cellules du tableau */
+.table td {
+text-align: center;
+
+}
+
+/* Style au survol de la ligne du tableau */
+.table tbody tr:hover {
+background-color: #e0e0e0;
+}
+
+    body{
+
+        background-color: #eee; 
+    }
+    
+    table th , table td{
+        text-align: center;
+    }
+    
+    table tr:nth-child(even){
+        background-color: #BEF2F5
+    }
+    
+    .pagination li:hover{
+        cursor: pointer;
+    }
+            table tbody tr {
+                display: none;
+            }
+    .form-group{
+      width: 30%;
+
+    }

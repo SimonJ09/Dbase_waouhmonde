@@ -4,18 +4,31 @@ from .models import Personne
 import pandas as pd
 from django.http import HttpResponse
 import csv
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UploadFileForm
-import pandas as pd
+from .forms import RecherchePersonneForm
 
-# Importez les modules nécessaires
-import pandas as pd
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .forms import UploadFileForm
-from .models import Personne
+def recherche_personne(request):
+    if request.method == 'POST':
+        print('ok')
+        form = RecherchePersonneForm(request.POST)
+        print(('ok'))
+        if form.is_valid():
+            terme_recherche = form.cleaned_data['terme_recherche']
+            print(terme_recherche)
+            personnes = Personne.objects.filter(personne__icontains=terme_recherche)
+    else:
+        form = RecherchePersonneForm()
+        personnes = Personne.objects.all()
+
+    context = {
+        'personnes': personnes,
+        'form': form,
+    }
+    return render(request, 'myapp_personnes/personne.html', context)
+
+
 
 def import_personne(request):
     if request.method == 'POST':
@@ -33,10 +46,10 @@ def import_personne(request):
                     raise ValueError("Le format de fichier n'est pas pris en charge.")
 
                 for index, row in data.iterrows():
-                    email = row['email']
+                    nom = row['nom']
+                    prenom = row['prenom']
                     # Vérifiez si une personne avec cet email existe déjà
-                    personne, created = Personne.objects.get_or_create(email=email)
-
+                    personne, created = Personne.objects.get_or_create(nom=nom, prenom=prenom)
                     # Mise à jour des valeurs avec celles du fichier
                     for field in Personne._meta.get_fields():
                         field_name = field.name
@@ -53,13 +66,13 @@ def import_personne(request):
         else:
             messages.error(request, f'Veuillez sélectionner un fichier valide.')
 
-    return redirect('admin:myapp_personne_changelist')  # Mise à jour de la redirection
+    return redirect('admin:myapp_personnes_personne_changelist')  # Mise à jour de la redirection
 
 
 
 
 def personne_view(request):
-    personnes = Personne.objects.all()
+    personnes = Personne.objects.all().order_by('nom')
     context = {
         'personnes': personnes
     }
@@ -119,6 +132,11 @@ def update_database_from_csv(file_path):
         mon_objet.champ1 = row['champ1']  
         mon_objet.champ2 = row['champ2']
         mon_objet.save()
+
+
+
+def custom_404(request, exception):
+    return render(request, 'Database/404.html', status=404)
 
 
 if __name__ == "__main__":

@@ -8,3 +8,5 @@ urlpatterns = [
     path('logout/', views.custom_logout, name='custom_logout'),
     # Autres URL liées à l'authentification
 ]
+
+handler404 = 'utilisateurs.views.custom_404'

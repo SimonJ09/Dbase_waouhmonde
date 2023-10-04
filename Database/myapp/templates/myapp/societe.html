@@ -1,9 +1,11 @@
 {% extends "Database/Base_html.html" %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="/media/styles/style_per.css">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/styles/style_per.css' %}">
 <div class="container">
     <a href="{% url 'export-societe-excel' %}" class="btn btn-primary">Télécharger Excel</a>
     <a href="{% url 'export-societe-csv' %}" class="btn btn-primary">Télécharger CSV</a>
+    
     <h2>Select Number Of Rows</h2>
     <div class="form-group">
         <select class="form-control" name="state" id="maxRows">
@@ -17,18 +19,23 @@
             <option value="100">100</option>
         </select>
     </div>
+
+    <form method="post" >
+        {% csrf_token %}
+        <input type="text" action="{% url 'recherche_societe' %}"  name="terme_recherche" placeholder="Rechercher...">
+        <button type="submit">Rechercher</button>
+    </form>
+    
+
     <table class="table table-striped table-class" id="table-id">
         <thead>
             <tr>
                 <th>Société</th>
                 <th>Secteur</th>
                 <th>Emails</th>
-                <th>Site web</th>
                 <th>telephone</th>
-                <th>Ville</th>
                 <th>Nom</th>
                 <th>Prenom</th>
-                <th>Poste</th>
             </tr>
         </thead>
         <tbody>
@@ -37,12 +44,9 @@
                 <td>{{ societe.societe }}</td>
                 <td>{{ societe.secteur }}</td>
                 <td>{{ societe.emails }}</td>
-                <td>{{ societe.site_web }}</td>
                 <td>{{ societe.telephone1 }}</td>
-                <td>{{ societe.ville }}</td>
                 <td>{{ societe.nom}}</td>
                 <td>{{ societe.prenom}}</td>
-                <td>{{ societe.poste}}</td>
                     {% empty %}
             {% endfor %}
         </tbody>
@@ -62,5 +66,5 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/media/Scripts/script_soc.js"></script>
+<script type="text/javascript" src="{% static 'myapp/scripts/script_soc.js' %}"></script>
 {% endblock %}

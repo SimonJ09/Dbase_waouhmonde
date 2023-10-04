@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="/media/styles/style_nex.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'utilisateurs/styles/style_nex.css' %}">
 </head>
 <body>
     <div class="container right-panel-active">
@@ -49,7 +50,6 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript" src="/media/scripts/script_nex.js"></script>
+    <script type="text/javascript" src="{% static 'utilisateurs/scripts/script_nex.js' %}"></script>
 </body>
 </html>
