@@ -1,0 +1,13 @@
+pandas
+gunicorn
+asgiref
+Django
+et-xmlfile
+numpy
+openpyxl
+Pillow
+python-dateutil
+pytz
+six
+sqlparse
+tzdata
